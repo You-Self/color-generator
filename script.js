@@ -35,7 +35,6 @@ function createColorCard(color) {
 
   const lockBtn = document.createElement('button');
   lockBtn.classList.add('lock');
-  // Use image for lock/unlock
   const lockImg = document.createElement('img');
   lockImg.src = './images/unlocked.png';
   lockImg.alt = 'unlock';
