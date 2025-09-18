@@ -34,12 +34,25 @@ function createColorCard(color) {
   };
 
   const lockBtn = document.createElement('button');
-  lockBtn.textContent = 'Lock';
   lockBtn.classList.add('lock');
+  // Use image for lock/unlock
+  const lockImg = document.createElement('img');
+  lockImg.src = './images/unlocked.png';
+  lockImg.alt = 'unlock';
+  lockImg.style.width = '20px';
+  lockImg.style.height = '20px';
+  lockBtn.appendChild(lockImg);
+
   lockBtn.onclick = () => {
     card.classList.toggle('locked');
     lockBtn.classList.toggle('locked');
-    lockBtn.textContent = card.classList.contains('locked') ? 'Unlock' : 'Lock';
+    if (card.classList.contains('locked')) {
+      lockImg.src = './images/locked.png';
+      lockImg.alt = 'lock';
+    } else {
+      lockImg.src = './images/unlocked.png';
+      lockImg.alt = 'unlock';
+    }
   };
 
   actions.appendChild(copyBtn);
