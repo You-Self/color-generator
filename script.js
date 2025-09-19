@@ -90,3 +90,44 @@ function generatePalette() {
 generatePalette();
 
 generateBtn.addEventListener('click', generatePalette);
+
+const customPalette = document.getElementById('custom-palette');
+customPalette.innerHTML = '';
+
+function createCustomCard(defaultColor = '#FF0000') {
+  const customCard = document.createElement('div');
+  customCard.classList.add('color-card');
+
+  const customBox = document.createElement('div');
+  customBox.classList.add('color-box');
+  customBox.style.backgroundColor = defaultColor;
+
+  const input = document.createElement('input');
+  input.type = 'text';
+  input.className = 'color-input';
+  input.value = defaultColor;
+  input.maxLength = 7;
+  input.style.margin = '10px 0';
+  input.oninput = function () {
+    let val = input.value.toUpperCase();
+    if (!val.startsWith('#')) val = '#' + val;
+    input.value = val.slice(0, 7);
+    if (/^#[0-9A-F]{6}$/i.test(val)) {
+      customBox.style.backgroundColor = val;
+      hexText.textContent = val;
+    }
+  };
+
+  const hexText = document.createElement('p');
+  hexText.className = 'hex';
+  hexText.textContent = defaultColor;
+
+  customCard.appendChild(customBox);
+  customCard.appendChild(input);
+  customCard.appendChild(hexText);
+
+  return customCard;
+}
+
+customPalette.appendChild(createCustomCard('#FF0000'));
+customPalette.appendChild(createCustomCard('#0000FF'));
