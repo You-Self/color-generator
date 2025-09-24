@@ -3,17 +3,33 @@
   margin: 0; 
   padding: 0; 
 }
+:root {
+  --bg: linear-gradient(135deg, #e0e0ee, #aaddf6);
+  --text: #111;
+  --glow: #7d57ef;
+  --card-locked: #a7a7ff; 
+  --input-border: #8ec5fc;
+}
+body.dark{
+  --bg: linear-gradient(135deg, #1e2028, #2d3942, #1a4567);
+  --text: #f1f1f1;
+  --glow: #00c3ff;
+  --card-locked: #2b5377;
+  --input-border: #3266a9;
+}
 body {
   font-family: Arial, sans-serif;
   display: flex;
   flex-direction: row;
   align-items: flex-start;
   padding: 20px;
-  background: #f7f7f7;
+  background: var(--bg);
+  color: var(--text);
   height: 900px;
+  transition: 0.2s;
 }
 
-.toggle-box.sidebar {
+.toggle-box {
   z-index: 10;
   text-align: center;
   padding: 20px;
@@ -27,18 +43,49 @@ body {
   left: 0;
   margin-right: 160px;
 }
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 70px;
+  height: 36px;
+}
+.switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+.slider {
+  position: absolute;
+  top: 0; left: 0;
+  right: 0; bottom: 0;
+  background: rgba(255,255,255,0.1);
+  border-radius: 50px;
+  box-shadow: 0 0 10px var(--glow);
+  cursor: pointer;
+  transition: 0.4s;
+}
+.slider::before {
+  content: "";
+  position: absolute;
+  height: 28px;
+  width: 28px;
+  left: 4px;
+  top: 4px;
+  background: white;
+  border-radius: 50%;
+  box-shadow: 0 0 8px rgb(73, 135, 137);
+  transition: 0.4s;
+}
+input:checked + .slider::before {
+  transform: translateX(34px);
+  background: #111;
+}
 
 .main-generator {
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin-bottom: 30px;
-}
-.custom-generator {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  margin-top: 30px;
+  margin-bottom: 40px;
 }
 
 h1 {
@@ -47,7 +94,7 @@ h1 {
 .description {
   margin-bottom: 15px;
   font-size: 16px;
-  color: #555;
+  color: var(--text);
 }
 
 .palette {
@@ -60,7 +107,7 @@ h1 {
 .color-card {
   border-radius: 12px;
   overflow: hidden;
-  box-shadow: 3px 3px 4px rgba(0, 0, 0, 0.4);
+  box-shadow: 1px 1px 10px var(--glow);
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -87,31 +134,28 @@ button {
   cursor: pointer;
   font-size: 14px;
 }
-.generate-btn {
+.generate-btn { 
   margin: 20px 0;
   padding: 10px 20px;
   font-size: 16px;
-  background: #333;
+  background: #35568c;
   color: #fff;
   border-radius: 8px;
 }
 .lock {
-  background: #ccc;
+  background: #d2d2fe;
 }
 .locked {
-  background: #666;
-  color: #fff;
+  background: var(--card-locked);
 }
-
 .color-input {
   padding: 8px;
   font-size: 16px;
-  border: 2px solid #ccc;
+  border: 2px solid var(--input-border);
   border-radius: 6px;
   text-align: center;
   width: 120px;
 }
-
 .custom-palette {
   display: flex;
   gap: 30px;

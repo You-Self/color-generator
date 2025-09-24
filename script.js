@@ -2,12 +2,12 @@ const palette = document.getElementById('palette');
 const generateBtn = document.querySelector('.generate-btn');
 
 function getRandomColor() {
-  const letters = '0123456789ABCDEF';
-  let color = '#';
+  const hexDigits = '0123456789ABCDEF';
+  let hexColor = '#';
   for (let i = 0; i < 6; i++) {
-    color += letters[Math.floor(Math.random() * 16)];
+    hexColor += hexDigits[Math.floor(Math.random() * 16)];
   }
-  return color;
+  return hexColor;
 }
 
 function createColorCard(color) {
@@ -131,3 +131,7 @@ function createCustomCard(defaultColor = '#FF0000') {
 
 customPalette.appendChild(createCustomCard('#FF0000'));
 customPalette.appendChild(createCustomCard('#0000FF'));
+
+document.getElementById("modeToggle").addEventListener("change", () => {
+  document.body.classList.toggle("dark");
+});
