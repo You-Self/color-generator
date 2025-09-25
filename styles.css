@@ -143,18 +143,30 @@ button {
   border-radius: 8px;
 }
 .lock {
-  background: #d2d2fe;
+  background: var(--card-locked);
+}
+.lockImg {
+  width: 20px;
+  height: 20px;
 }
 .locked {
   background: var(--card-locked);
 }
-.color-input {
+
+.custom-input {
   padding: 8px;
   font-size: 16px;
   border: 2px solid var(--input-border);
   border-radius: 6px;
   text-align: center;
   width: 120px;
+  margin: 10px 5px;
+}
+.custom-selector {
+  border: none;
+  cursor: pointer;
+  width: 40px;
+  height: 20px;
 }
 .custom-palette {
   display: flex;

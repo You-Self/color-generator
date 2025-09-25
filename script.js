@@ -36,10 +36,9 @@ function createColorCard(color) {
   const lockBtn = document.createElement('button');
   lockBtn.classList.add('lock');
   const lockImg = document.createElement('img');
+  lockImg.classList.add('lockImg');
   lockImg.src = './images/unlocked.png';
   lockImg.alt = 'unlock';
-  lockImg.style.width = '20px';
-  lockImg.style.height = '20px';
   lockBtn.appendChild(lockImg);
 
   lockBtn.onclick = () => {
@@ -104,10 +103,9 @@ function createCustomCard(defaultColor = '#FF0000') {
 
   const input = document.createElement('input');
   input.type = 'text';
-  input.className = 'color-input';
+  input.className = 'custom-input';
   input.value = defaultColor;
   input.maxLength = 7;
-  input.style.margin = '10px 5px';
   input.oninput = function () {
     let val = input.value.toUpperCase();
     if (!val.startsWith('#')) val = '#' + val;
@@ -115,17 +113,30 @@ function createCustomCard(defaultColor = '#FF0000') {
     if (/^#[0-9A-F]{6}$/i.test(val)) {
       customBox.style.backgroundColor = val;
       hexText.textContent = val;
+      customSelector.value = val;
     }
   };
-
+  
+  const customSelector = document.createElement('input');
+  customSelector.type = 'color';
+  customSelector.className = 'color-selector';
+  customSelector.value = defaultColor;
+  customSelector.oninput = function () {
+    const val = customSelector.value.toUpperCase();
+    customBox.style.backgroundColor = val;
+    hexText.textContent = val;
+    input.value = val;
+  };
   const hexText = document.createElement('p');
   hexText.className = 'hex';
   hexText.textContent = defaultColor;
-
+  
+  
   customCard.appendChild(customBox);
   customCard.appendChild(input);
+  customCard.appendChild(customSelector);
   customCard.appendChild(hexText);
-
+  
   return customCard;
 }
 
