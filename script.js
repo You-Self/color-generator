@@ -112,7 +112,6 @@ function createCustomCard(defaultColor = '#FF0000') {
     input.value = val.slice(0, 7);
     if (/^#[0-9A-F]{6}$/i.test(val)) {
       customBox.style.backgroundColor = val;
-      hexText.textContent = val;
       customSelector.value = val;
     }
   };
@@ -124,18 +123,22 @@ function createCustomCard(defaultColor = '#FF0000') {
   customSelector.oninput = function () {
     const val = customSelector.value.toUpperCase();
     customBox.style.backgroundColor = val;
-    hexText.textContent = val;
     input.value = val;
   };
-  const hexText = document.createElement('p');
-  hexText.className = 'hex';
-  hexText.textContent = defaultColor;
-  
-  
+
+  const copyBtnCustom = document.createElement('button');
+  copyBtnCustom.textContent = 'Copy';
+  copyBtnCustom.classList.add('copy-button');
+  copyBtnCustom.onclick = () => {
+    navigator.clipboard.writeText(input.value);
+    copyBtnCustom.textContent = 'Copied!';
+    setTimeout(() => copyBtnCustom.textContent = 'Copy', 1000);
+  };
+
   customCard.appendChild(customBox);
   customCard.appendChild(input);
   customCard.appendChild(customSelector);
-  customCard.appendChild(hexText);
+  customCard.appendChild(copyBtnCustom);
   
   return customCard;
 }

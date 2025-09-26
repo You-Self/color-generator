@@ -25,7 +25,7 @@ body {
   padding: 20px;
   background: var(--bg);
   color: var(--text);
-  height: 900px;
+  height: 910px;
   transition: 0.2s;
 }
 
@@ -173,4 +173,14 @@ button {
   gap: 30px;
   justify-content: center;
   margin-top: 20px;
+}
+.copy-button {
+  margin-top: 5px;
+  padding: 6px 12px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 16px;
+  background: #fff;
+  color: #111;
 }
