@@ -10,6 +10,18 @@ function getRandomColor() {
   return hexColor;
 }
 
+function copyToClipboard(text, button) {
+  navigator.clipboard.writeText(text);
+  if (button) {
+    button.textContent = 'Copied!';
+    if (button._copyTimer) clearTimeout(button._copyTimer);
+    button._copyTimer = setTimeout(() => {
+      button.textContent = 'Copy';
+      button._copyTimer = null;
+    }, 1000);
+  }
+}
+
 function createColorCard(color) {
   const card = document.createElement('div');
   card.classList.add('color-card');
@@ -27,11 +39,7 @@ function createColorCard(color) {
 
   const copyBtn = document.createElement('button');
   copyBtn.textContent = 'Copy';
-  copyBtn.onclick= () => {
-    navigator.clipboard.writeText(color);
-    copyBtn.textContent = 'Copied!';
-    setTimeout(() => copyBtn.textContent = 'Copy', 1000);
-  };
+  copyBtn.onclick = () => copyToClipboard(color, copyBtn);
 
   const lockBtn = document.createElement('button');
   lockBtn.classList.add('lock');
@@ -76,11 +84,8 @@ function generatePalette() {
         const newColor = getRandomColor();
         card.querySelector('.color-box').style.backgroundColor = newColor;
         card.querySelector('.hex').textContent = newColor;
-        card.querySelector('button').onclick = () => {
-          navigator.clipboard.writeText(newColor);
-          card.querySelector('button').textContent = 'Copied!';
-          setTimeout(() => card.querySelector('button').textContent = 'Copy', 1000);
-        }
+        const copyBtn = card.querySelector('.actions button');
+        copyBtn.onclick = () => copyToClipboard(newColor, copyBtn);
       }
     });
   }
@@ -129,11 +134,7 @@ function createCustomCard(defaultColor = '#FF0000') {
   const copyBtnCustom = document.createElement('button');
   copyBtnCustom.textContent = 'Copy';
   copyBtnCustom.classList.add('copy-button');
-  copyBtnCustom.onclick = () => {
-    navigator.clipboard.writeText(input.value);
-    copyBtnCustom.textContent = 'Copied!';
-    setTimeout(() => copyBtnCustom.textContent = 'Copy', 1000);
-  };
+  copyBtnCustom.onclick = () => copyToClipboard(input.value, copyBtnCustom);
 
   customCard.appendChild(customBox);
   customCard.appendChild(input);
