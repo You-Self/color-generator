@@ -29,7 +29,7 @@ body {
   transition: 0.2s;
 }
 
-.toggle-box {
+.theme-toggle-box {
   z-index: 10;
   text-align: center;
   padding: 20px;
@@ -81,7 +81,7 @@ input:checked + .slider::before {
   background: #111;
 }
 
-.main-generator {
+.palette-generator {
   display: flex;
   flex-direction: column;
   align-items: center;
